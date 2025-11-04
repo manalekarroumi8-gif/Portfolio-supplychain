@@ -1,192 +1,36 @@
-/* ===== Global ===== */
+/* ==== STYLE GLOBAL ==== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #0f0f1a;
-    color: #fff;
-    scroll-behavior: smooth;
+  background: radial-gradient(ellipse at bottom, #0a0a0f 0%, #000 100%);
+  color: #fff;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
 }
 
-/* ===== Menu fixe ===== */
-nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background-color: rgba(15, 15, 26, 0.95);
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    padding: 15px 0;
-    z-index: 1000;
-}
-nav a {
-    color: #00e0ff;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-nav a:hover {
-    color: #fff;
-}
-
-/* ===== Header ===== */
-header {
-    position: relative;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: radial-gradient(circle at center, #1f1f2a 0%, #0f0f1a 100%);
-    overflow: hidden;
-}
-
-/* Soleil central */
-.sun {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 150px;
-    height: 150px;
-    background-color: #00e0ff;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.8em;
-    font-weight: bold;
-    box-shadow: 0 0 40px #00e0ff;
-    text-align: center;
-    z-index: 2;
-}
-
-/* Planètes */
-.planet {
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-size: cover;
-    box-shadow: 0 0 20px rgba(0,224,255,0.7);
-    cursor: pointer;
-    transition: transform 0.3s;
-}
-.planet:hover {
-    transform: scale(1.3);
-    z-index: 3;
-}
-
-/* Orbites */
-.orbit {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    border: 1px dashed rgba(255,255,255,0.2);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-}
-
-/* Texte accroche header */
-.header-text {
-    position:absolute;
-    top:20%;
-    width:100%;
-    text-align:center;
-    color:#00e0ff;
-    font-size:1.5em;
-    font-weight:bold;
-    text-shadow: 0 0 10px #00e0ff;
-}
-
-/* Texte présentation header */
-.presentation-text {
-    position:absolute;
-    top:30%;
-    width:100%;
-    text-align:center;
-    color:#00e0ff;
-    max-width:800px;
-    margin:0 auto;
-    padding:0 20px;
-    font-size:1.2em;
-    line-height:1.5em;
-}
-
-/* Canvas lignes style molécule */
+/* ==== CANVAS : MOLÉCULES ==== */
 #linesCanvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1; /* Derrière le soleil et planètes */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* ===== Sections ===== */
-section {
-    max-width: 1000px;
-    margin: 100px auto;
-    padding: 50px 20px;
-}
-
-h2 {
-    color: #00e0ff;
-    border-bottom: 2px solid #00e0ff;
-    padding-bottom: 5px;
-    margin-bottom: 20px;
-}
-
-/* Cartes */
-.cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
-
-.card {
-    background: #1f1f2a;
-    padding: 20px;
-    border-radius: 15px;
-    min-width: 250px;
-    box-shadow: 0 0 20px rgba(0,224,255,0.3);
-    text-align: center;
-}
-
-.card img {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 10px;
-}
-
-/* Formulaire */
-input, textarea {
-    width: 90%;
-    padding: 8px;
-    margin: 5px 0;
-    border-radius: 5px;
-    border: none;
-}
-
-button {
-    background-color: #00e0ff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    color: #000;
-    font-weight: bold;
-    cursor: pointer;
-}
-button:hover {
-    background-color: #00b8cc;
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    padding: 30px;
-    background-color: #1f1f2a;
-    color: #888;
-}
-
+/* ==== MENU ==== */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filt

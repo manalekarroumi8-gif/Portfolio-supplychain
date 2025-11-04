@@ -1,63 +1,105 @@
-// ===== Planètes compétences =====
-const skillPlanets = [
-    {el: document.getElementById('excel'), radius: 100, speed: 0.02, angle: 0},
-    {el: document.getElementById('python'), radius: 130, speed: 0.015, angle: 90},
-    {el: document.getElementById('powerbi'), radius: 160, speed: 0.01, angle: 180},
-    {el: document.getElementById('sql'), radius: 190, speed: 0.008, angle: 270},
-];
+/* === FOND ANIMÉ : MOLÉCULES CONNECTÉES === */
+const canvas = document.getElementById("linesCanvas");
+const ctx = canvas.getContext("2d");
 
-// ===== Planètes formations =====
-const eduPlanets = [
-    {el: document.getElementById('bac'), radius: 220, speed: 0.012, angle: 0},
-    {el: document.getElementById('prepas'), radius: 250, speed: 0.009, angle: 120},
-    {el: document.getElementById('oc'), radius: 280, speed: 0.007, angle: 240},
-];
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-// ===== Canvas pour les lignes =====
-const canvas = document.getElementById('linesCanvas');
-const ctx = canvas.getContext('2d');
+let particlesArray = [];
+const numberOfParticles = 80;
 
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
+class Particle {
+  constructor(x, y, directionX, directionY, size, color) {
+    this.x = x;
+    this.y = y;
+    this.directionX = directionX;
+    this.directionY = directionY;
+    this.size = size;
+    this.color = color;
+  }
 
-// ===== Animation planètes =====
-function animatePlanets() {
-    const allPlanets = skillPlanets.concat(eduPlanets);
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+    ctx.fillStyle = this.color;
+    ctx.fill();
+  }
 
-    allPlanets.forEach(p => {
-        p.angle += p.speed;
-        p.x = centerX + p.radius * Math.cos(p.angle);
-        p.y = centerY + p.radius * Math.sin(p.angle);
-        p.el.style.left = `${p.x - 30}px`; // 30px = demi largeur planète
-        p.el.style.top = `${p.y - 30}px`;
-    });
-
-    drawLines(allPlanets);
-    requestAnimationFrame(animatePlanets);
+  update() {
+    if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+    if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+    this.x += this.directionX;
+    this.y += this.directionY;
+    this.draw();
+  }
 }
 
-// ===== Dessiner lignes style molécule =====
-function drawLines(planets) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    planets.forEach(p1 => {
-        planets.forEach(p2 => {
-            if(p1 !== p2){
-                ctx.beginPath();
-                ctx.moveTo(p1.x, p1.y);
-                ctx.lineTo(p2.x, p2.y);
-                ctx.strokeStyle = 'rgba(0,224,255,0.1)';
-                ctx.lineWidth = 1;
-                ctx.stroke();
-            }
-        });
-    });
+function init() {
+  particlesArray = [];
+  for (let i = 0; i < numberOfParticles; i++) {
+    let size = Math.random() * 2 + 1;
+    let x = Math.random() * (window.innerWidth - size * 2);
+    let y = Math.random() * (window.innerHeight - size * 2);
+    let directionX = (Math.random() * 0.4) - 0.2;
+    let directionY = (Math.random() * 0.4) - 0.2;
+    let color = "#00e0ff";
+    particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+  }
 }
 
-// ===== Lancer animation =====
-animatePlanets();
+function connect() {
+  for (let a = 0; a < particlesArray.length; a++) {
+    for (let b = a; b < particlesArray.length; b++) {
+      let dx = particlesArray[a].x - particlesArray[b].x;
+      let dy = particlesArray[a].y - particlesArray[b].y;
+      let distance = dx*dx + dy*dy;
+      if (distance < 12000) {
+        ctx.strokeStyle = "rgba(0, 224, 255, 0.15)";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+  particlesArray.forEach(p => p.update());
+  connect();
+}
+
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  init();
+});
+
+init();
+animate();
+
+/* === ANIMATION DES PLANÈTES AUTOUR DU NOM === */
+const planets = document.querySelectorAll(".planet");
+
+function orbitPlanets() {
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight / 2;
+  let time = Date.now() * 0.001;
+
+  planets.forEach((planet, index) => {
+    const angle = time * (0.3 + index * 0.1);
+    const radius = 150 + index * 50;
+
+    const x = centerX + Math.cos(angle) * radius - planet.offsetWidth / 2;
+    const y = centerY + Math.sin(angle) * radius - planet.offsetHeight / 2;
+
+    planet.style.transform = `translate(${x}px, ${y}px) rotate(${angle * 57.3}deg)`;
+  });
+
+  requestAnimationFrame(orbitPlanets);
+}
+
+orbitPlanets();

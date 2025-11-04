@@ -1,128 +1,52 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manale Karroumi - Data Analyst</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-<!-- Menu -->
-<nav>
-    <a href="#presentation">Présentation</a>
-    <a href="#skills">Compétences</a>
-    <a href="#projects">Projets</a>
-    <a href="#education">Formations</a>
-    <a href="#contact">Contact</a>
-</nav>
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: "Poppins", sans-serif;
+  background-color: #020611;
+  color: #e0e0e0;
+}
 
-<!-- Header / Présentation -->
-<header id="presentation">
-    <div class="header-text">Vous cherchez un Data Analyst ? 👩‍💻</div>
-    <div class="sun">Manale<br>Karroumi</div>
+/* ===== CANVAS MOLECULES ===== */
+#linesCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0; /* tout au fond */
+}
 
-    <!-- Orbites -->
-    <div class="orbit" style="width: 200px; height: 200px;"></div>
-    <div class="orbit" style="width: 300px; height: 300px;"></div>
-    <div class="orbit" style="width: 400px; height: 400px;"></div>
+/* ===== NAVIGATION ===== */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+  z-index: 4;
+  border-bottom: 1px solid rgba(0, 224, 255, 0.2);
+}
 
-    <!-- Planètes compétences -->
-    <div class="planet" id="excel" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/73/Microsoft_Excel_2013_logo.svg');"></div>
-    <div class="planet" id="python" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg');"></div>
-    <div class="planet" id="powerbi" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/c/cf/Microsoft_Power_BI_logo.svg');"></div>
-    <div class="planet" id="sql" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/8/87/Sql_data_base_with_logo.png');"></div>
+nav a {
+  color: #00e0ff;
+  margin: 0 20px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s, text-shadow 0.3s;
+}
 
-    <!-- Planètes formations -->
-    <div class="planet" id="bac" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/3/32/Baccalauréat_logo.png');"></div>
-    <div class="planet" id="prepas" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/46/Classe_prepa_logo.png');"></div>
-    <div class="planet" id="oc" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/3/3a/OpenClassrooms_logo.png');"></div>
-
-    <!-- Présentation professionnelle -->
-    <div class="presentation-text">
-        Passionnée par l'analyse de données, je transforme des ensembles complexes en insights exploitables.<br>
-        Spécialisée en Supply Chain et BI, j’utilise Python, SQL et Power BI pour optimiser les performances et éclairer les décisions stratégiques.
-    </div>
-</header>
-
-<!-- Compétences -->
-<section id="skills">
-    <h2>Compétences</h2>
-    <div class="cards">
-        <div class="card">SQL & Bases de données</div>
-        <div class="card">Python & Data Analysis</div>
-        <div class="card">Power BI & Tableau</div>
-        <div class="card">Supply Chain Management</div>
-        <div class="card">Machine Learning</div>
-    </div>
-</section>
-
-<!-- Projets -->
-<section id="projects">
-    <h2>Projets</h2>
-    <div class="cards">
-        <div class="card">
-            <h3>Dashboard BI</h3>
-            <p>Tableau de bord Power BI pour suivi KPIs</p>
-        </div>
-        <div class="card">
-            <h3>Optimisation des stocks</h3>
-            <p>Projet Python pour améliorer rotation des stocks</p>
-        </div>
-    </div>
-</section>
-
-<!-- Formations -->
-<section id="education">
-    <h2>Formations</h2>
-    <div class="cards">
-        <div class="card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/3/32/Baccalauréat_logo.png" alt="Bac Général">
-            <h3>Bac Général - Option Physique-Chimie</h3>
-            <p>Obtention du Baccalauréat général avec option Physique-Chimie</p>
-        </div>
-        <div class="card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Classe_prepa_logo.png" alt="Classes Prépas">
-            <h3>Classes Prépas Économiques (ECT)</h3>
-            <p>2 ans de classes préparatoires économiques et commerciales (ECT)</p>
-        </div>
-        <div class="card">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/OpenClassrooms_logo.png" alt="OpenClassrooms">
-            <h3>OpenClassrooms</h3>
-            <p>Formation en Data Analysis et Supply Chain</p>
-        </div>
-    </div>
-</section>
-
-<!-- Contact -->
-<section id="contact">
-    <h2>Contact</h2>
-    <div class="cards">
-        <div class="card">
-            <h3>Email</h3>
-            <p>manale.karroumi@example.com</p>
-        </div>
-        <div class="card">
-            <h3>Téléphone</h3>
-            <p>06 09 68 52 60</p>
-        </div>
-        <div class="card">
-            <h3>Envoyer un message</h3>
-            <form onsubmit="alert('Merci pour votre message !'); return false;">
-                <input type="text" placeholder="Nom" required>
-                <input type="email" placeholder="Email" required>
-                <textarea placeholder="Message" required></textarea>
-                <br>
-                <button type="submit">Envoyer</button>
-            </form>
-        </div>
-    </div>
-</section>
-
-<footer>
-    &copy; 2025 Manale Karroumi
-</footer>
-
-<script src="script.js"></script>
-</body>
-</html>
+nav a:hover {
+  color: #ffffff;
+  text-shado
