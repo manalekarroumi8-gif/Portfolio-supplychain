@@ -1,93 +1,108 @@
+/* === ANIMATION MOLÉCULES === */
 const canvas = document.getElementById("linesCanvas");
 const ctx = canvas.getContext("2d");
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+let width = (canvas.width = window.innerWidth);
+let height = (canvas.height = window.innerHeight);
 
-let particlesArray = [];
-const numberOfParticles = 100;
-let mouse = { x: null, y: null, radius: 100 };
+const particles = [];
+const numParticles = 100;
+const maxDistance = 150;
+let mouse = { x: null, y: null, radius: 150 };
 
-window.addEventListener('mousemove', function(event){
-  mouse.x = event.x;
-  mouse.y = event.y;
+window.addEventListener("resize", () => {
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+});
+
+window.addEventListener("mousemove", (e) => {
+  mouse.x = e.x;
+  mouse.y = e.y;
 });
 
 class Particle {
-  constructor(x, y, directionX, directionY, size, color){
-    this.x = x; this.y = y;
-    this.directionX = directionX; this.directionY = directionY;
-    this.size = size; this.color = color;
+  constructor() {
+    this.x = Math.random() * width;
+    this.y = Math.random() * height;
+    this.vx = (Math.random() - 0.5) * 1.2;
+    this.vy = (Math.random() - 0.5) * 1.2;
+    this.size = 2;
   }
-  draw(){
+
+  move() {
+    if (this.x < 0 || this.x > width) this.vx *= -1;
+    if (this.y < 0 || this.y > height) this.vy *= -1;
+    this.x += this.vx;
+    this.y += this.vy;
+
+    // Interaction avec la souris
+    const dx = mouse.x - this.x;
+    const dy = mouse.y - this.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    if (distance < mouse.radius) {
+      this.x -= dx / 20;
+      this.y -= dy / 20;
+    }
+  }
+
+  draw() {
     ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI*2, false);
-    ctx.fillStyle = this.color;
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = "#00e0ff";
     ctx.fill();
   }
-  update(){
-    if(this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
-    if(this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
-
-    let dx = mouse.x - this.x;
-    let dy = mouse.y - this.y;
-    let distance = Math.sqrt(dx*dx + dy*dy);
-    if(distance < mouse.radius){
-      let angle = Math.atan2(dy, dx);
-      let force = (mouse.radius - distance)/mouse.radius;
-      this.x -= Math.cos(angle) * force * 2;
-      this.y -= Math.sin(angle) * force * 2;
-    }
-
-    this.x += this.directionX;
-    this.y += this.directionY;
-    this.draw();
-  }
 }
 
-function init(){
-  particlesArray = [];
-  for(let i=0;i<numberOfParticles;i++){
-    let size = Math.random()*3 + 1;
-    let x = Math.random()*(canvas.width-size*2);
-    let y = Math.random()*(canvas.height-size*2);
-    let directionX = (Math.random()*0.6)-0.3;
-    let directionY = (Math.random()*0.6)-0.3;
-    let color = "rgba(0,224,255,0.7)";
-    particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
-  }
+// Initialiser les particules
+for (let i = 0; i < numParticles; i++) {
+  particles.push(new Particle());
 }
 
-function connect(){
-  for(let a=0;a<particlesArray.length;a++){
-    for(let b=a;b<particlesArray.length;b++){
-      let dx = particlesArray[a].x - particlesArray[b].x;
-      let dy = particlesArray[a].y - particlesArray[b].y;
-      let distance = dx*dx + dy*dy;
-      if(distance < 15000){
-        ctx.strokeStyle = "rgba(0,224,255,0.2)";
-        ctx.lineWidth = 1;
+// Animation
+function animate() {
+  ctx.clearRect(0, 0, width, height);
+
+  for (let i = 0; i < particles.length; i++) {
+    particles[i].move();
+    particles[i].draw();
+
+    // Lignes entre particules proches
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      if (distance < maxDistance) {
         ctx.beginPath();
-        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
-        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+        ctx.strokeStyle = `rgba(0, 224, 255, ${1 - distance / maxDistance})`;
+        ctx.lineWidth = 1;
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
         ctx.stroke();
       }
     }
   }
-}
 
-function animate(){
   requestAnimationFrame(animate);
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  particlesArray.forEach(p => p.update());
-  connect();
 }
 
-window.addEventListener('resize', ()=>{
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  init();
-});
-
-init();
 animate();
+
+/* === FADE-IN DES SECTIONS === */
+const faders = document.querySelectorAll(".fade-in");
+
+const appearOptions = {
+  threshold: 0.3,
+  rootMargin: "0px 0px -50px 0px"
+};
+
+const appearOnScroll = new IntersectionObserver(function (entries, appearOnScroll) {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add("visible");
+    appearOnScroll.unobserve(entry.target);
+  });
+}, appearOptions);
+
+faders.forEach(fader => {
+  appearOnScroll.observe(fader);
+});
