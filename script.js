@@ -26,11 +26,9 @@ class Particle {
     ctx.fill();
   }
   update(){
-    // rebond sur les bords
     if(this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
     if(this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
 
-    // réaction au curseur
     let dx = mouse.x - this.x;
     let dy = mouse.y - this.y;
     let distance = Math.sqrt(dx*dx + dy*dy);

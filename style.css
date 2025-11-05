@@ -23,7 +23,7 @@ nav {
 nav a { color:#00e0ff; text-decoration:none; font-weight:500; transition:color 0.3s; }
 nav a:hover { color:#fff; }
 
-/* Nom à gauche */
+/* Nom aligné à gauche */
 .sun.left {
   position:absolute;
   top:50%;
@@ -46,6 +46,15 @@ nav a:hover { color:#fff; }
   border-radius:20px; box-shadow:0 0 40px rgba(0,224,255,0.15);
 }
 .section h2 { font-size:2.2rem; color:#00e0ff; margin-bottom:20px; text-transform:uppercase; letter-spacing:1px; }
+
+#presentation {
+  margin-left:30%; /* Décalage pour ne pas recouvrir le nom */
+}
+
+#presentation p {
+  font-size:1.2rem;
+  line-height:1.8;
+}
 
 /* Cartes */
 .cards { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; margin-top:20px; }
