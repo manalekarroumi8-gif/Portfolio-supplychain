@@ -3,78 +3,66 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Manale Karroumi | Data Analyst Supply Chain</title>
+  <title>Portfolio - Manale Karroumi</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <!-- Canvas fond animé -->
   <canvas id="linesCanvas"></canvas>
 
-  <!-- Nom en haut à gauche -->
-  <div class="sun left">Manale<br>Karroumi</div>
+  <!-- ===== HEADER ===== -->
+  <header>
+    <h1>Manale Karroumi</h1>
+    <div class="menu-toggle" id="menuToggle">☰ Menu</div>
+    <nav id="navMenu">
+      <ul>
+        <li><a href="#competences">Compétences</a></li>
+        <li><a href="#formations">Formations</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <!-- Menu de navigation -->
-  <nav>
-    <ul>
-      <li><a href="#competences">Compétences</a></li>
-      <li><a href="#formations">Formations</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
-
-  <!-- Présentation -->
-  <section id="presentation" class="section">
+  <!-- ===== SECTION PRÉSENTATION ===== -->
+  <section id="presentation" class="fade-in">
     <p>
-      Je suis <strong>Manale Karroumi</strong>, <b>Data Analyst spécialisée en Supply Chain</b>,
-      passionnée par la valorisation des données pour soutenir la performance opérationnelle.  
-      J’analyse, structure et interprète les données afin d’identifier des leviers d’optimisation, 
-      améliorer la visibilité des flux logistiques et appuyer les décisions stratégiques.  
-      Mon objectif : <b>transformer les données en informations claires et exploitables 
-      pour accompagner la prise de décision et renforcer l’efficacité des organisations.</b>
+      Je suis <strong>Manale Karroumi</strong>, <strong>Data Analyst</strong> passionnée par 
+      la Supply Chain, l’économie et la gestion. J’aide les entreprises à transformer leurs données en leviers d’efficacité,
+      à anticiper les besoins et à optimiser leurs performances grâce à des analyses précises et stratégiques.
     </p>
   </section>
 
-  <!-- Compétences -->
-  <section id="competences" class="section">
+  <!-- ===== SECTION COMPÉTENCES ===== -->
+  <section id="competences" class="section fade-in">
     <h2>Compétences</h2>
-    <div class="cards">
-      <div class="card"><h3>Analyse de données</h3><p>Exploration, visualisation et interprétation pour guider les décisions.</p></div>
-      <div class="card"><h3>Power BI & Excel</h3><p>Création de tableaux de bord et automatisation des reportings.</p></div>
-      <div class="card"><h3>Python & SQL</h3><p>Nettoyage, traitement et manipulation des données à grande échelle.</p></div>
-      <div class="card"><h3>Optimisation Supply Chain</h3><p>Amélioration des processus logistiques et suivi des indicateurs de performance.</p></div>
-    </div>
+    <ul>
+      <li>Analyse de données : Python, SQL, Excel</li>
+      <li>Visualisation : Power BI, Tableau</li>
+      <li>Gestion des flux Supply Chain</li>
+      <li>Modélisation économique et prévisions</li>
+    </ul>
   </section>
 
-  <!-- Formations -->
-  <section id="formations" class="section">
+  <!-- ===== SECTION FORMATIONS ===== -->
+  <section id="formations" class="section fade-in">
     <h2>Formations</h2>
-    <div class="formations-cards">
-      <div class="formation-card">
-        <img src="images/oc.png" alt="OpenClassrooms">
-        <h3>Data Analyst - OpenClassrooms</h3>
-        <p>Formation axée sur l’analyse de données, Python, SQL, Power BI et storytelling data.</p>
-      </div>
-      <div class="formation-card">
-        <img src="images/classes-prepas.png" alt="Classes Prépas ECT">
-        <h3>Classes Prépas Économiques (ECT)</h3>
-        <p>Économie, Gestion et Technologies — approche quantitative, analytique et managériale.</p>
-      </div>
-      <div class="formation-card">
-        <img src="images/bac.png" alt="Bac général">
-        <h3>Baccalauréat Général</h3>
-        <p>Option Physique-Chimie — Mention Bien.</p>
-      </div>
+    <div class="formation">
+      <p><strong>Bac Général</strong> — Option Physique Chimie</p>
+    </div>
+    <div class="formation">
+      <p><strong>Classes Préparatoires Économiques (ECT)</strong></p>
+    </div>
+    <div class="formation">
+      <p><strong>Formation Data Analyst</strong> — OpenClassrooms</p>
     </div>
   </section>
 
-  <!-- Contact -->
-  <section id="contact" class="section">
+  <!-- ===== SECTION CONTACT ===== -->
+  <section id="contact" class="section fade-in">
     <h2>Contact</h2>
-    <p>
-      📧 <a href="mailto:manalekarroumi8@gmail.com">manalekarroumi8@gmail.com</a><br>
-      📞 <a href="tel:+33609685260">06 09 68 52 60</a><br>
-      🌐 <a href="https://www.linkedin.com/in/manale-karroumi" target="_blank">LinkedIn</a>
-    </p>
+    <p>Email : <a href="mailto:manalekarroumi8@gmail.com">manalekarroumi8@gmail.com</a></p>
+    <p>Téléphone : 06 09 68 52 60</p>
+    <p>LinkedIn : <a href="#" target="_blank">linkedin.com/in/manalekarroumi</a></p>
   </section>
 
   <script src="script.js"></script>
