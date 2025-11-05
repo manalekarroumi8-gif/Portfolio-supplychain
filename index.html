@@ -1,82 +1,34 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio - Manale Karroumi</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <canvas id="linesCanvas"></canvas>
+/* FOND MOLÉCULES */
+const canvas = document.getElementById("linesCanvas");
+const ctx = canvas.getContext("2d");
 
-  <!-- ===== HEADER ===== -->
-  <header>
-    <h1>Manale Karroumi</h1>
-    <div class="menu-toggle" id="menuToggle">☰ Menu</div>
-    <nav id="navMenu">
-      <ul>
-        <li><a href="#competences">Compétences</a></li>
-        <li><a href="#formations">Formations</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+let width = canvas.width = window.innerWidth;
+let height = canvas.height = window.innerHeight;
+const particles = [];
+const numParticles = 100;
+const maxDistance = 150;
+let mouse = { x: null, y: null, radius: 150 };
 
-  <!-- ===== SECTION PRÉSENTATION ===== -->
-  <section id="presentation" class="fade-in">
-    <p>
-      Data Analyst spécialisée en Supply Chain, je mets la donnée au service de la performance opérationnelle et stratégique. 
-      Mon approche allie rigueur analytique, compréhension économique et sens du détail pour transformer l’information en valeur mesurable.
-    </p>
-  </section>
+window.addEventListener("resize", () => {
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+});
 
-  <!-- ===== SECTION COMPÉTENCES ===== -->
-  <section id="competences" class="section fade-in">
-    <h2>Compétences</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>Python</h3>
-      </div>
-      <div class="card">
-        <h3>SQL</h3>
-      </div>
-      <div class="card">
-        <h3>Excel</h3>
-      </div>
-      <div class="card">
-        <h3>Power BI</h3>
-      </div>
-    </div>
-  </section>
+window.addEventListener("mousemove", (e) => {
+  mouse.x = e.x;
+  mouse.y = e.y;
+});
 
-  <!-- ===== SECTION FORMATIONS ===== -->
-  <section id="formations" class="section fade-in">
-    <h2>Formations</h2>
-    <div class="formations-cards">
-      <div class="formation-card">
-        <h3>Bac Général</h3>
-        <p>Option Économie Gestion, Physique Chimie</p>
-      </div>
-      <div class="formation-card">
-        <h3>Classes Préparatoires</h3>
-        <p>Économiques (ECT)</p>
-      </div>
-      <div class="formation-card">
-        <img src="oppenclassrooms-logo.png" alt="OpenClassrooms Logo" />
-        <h3>OpenClassrooms</h3>
-        <p>Formation Data Analyst</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SECTION CONTACT ===== -->
-  <section id="contact" class="section fade-in">
-    <h2>Contact</h2>
-    <p>Email : <a href="mailto:manalekarroumi8@gmail.com">manalekarroumi8@gmail.com</a></p>
-    <p>Téléphone : 06 09 68 52 60</p>
-    <p>LinkedIn : <a href="#" target="_blank">linkedin.com/in/manalekarroumi</a></p>
-  </section>
-
-  <script src="script.js"></script>
-</body>
-</html>
+class Particle {
+  constructor() {
+    this.x = Math.random() * width;
+    this.y = Math.random() * height;
+    this.vx = (Math.random()-0.5)*1.2;
+    this.vy = (Math.random()-0.5)*1.2;
+    this.size = 2;
+  }
+  move() {
+    if(this.x<0||this.x>width)this.vx*=-1;
+    if(this.y<0||this.y>height)this.vy*=-1;
+    this.x+=this.vx; this.y+=this.vy;
+    const
